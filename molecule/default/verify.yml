@@ -1,0 +1,19 @@
+---
+# Don't forget to keep this file updated
+# molecule/<scenario>/verify.yml
+- name: "Verify"
+  hosts: "all"
+  gather_facts: false
+  tasks:
+
+    - name: "Get Rsyslog service current state"
+      register: rsyslog_service_status
+      failed_when: not rsyslog_service_status.status.ActiveState == 'active'
+      ansible.builtin.systemd:
+        name: "rsyslog"
+
+    - name: "Check Rsyslog files"
+      register: file_check
+      failed_when: not file_check.stat.exists
+      ansible.builtin.stat:
+        path: "/etc/rsyslog.conf"

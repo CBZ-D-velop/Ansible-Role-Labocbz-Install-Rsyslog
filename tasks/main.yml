@@ -1,0 +1,16 @@
+---
+- name: "Install packages"
+  notify: "Start and enable Rsyslog"
+  ansible.builtin.package:
+    update_cache: true
+    name:
+      - rsyslog
+
+- name: "Import rsyslog configuration"
+  notify: "Restart Rsyslog"
+  ansible.builtin.copy:
+    src: "files/rsyslog.conf"
+    dest: "/etc/rsyslog.conf"
+    group: "root"
+    owner: "root"
+    mode: 0664

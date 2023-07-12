@@ -1,0 +1,16 @@
+---
+- name: "Start and enable Rsyslog"
+  register: rsyslog_service_status
+  changed_when: rsyslog_service_status.state != "started"
+  ansible.builtin.service:
+    name: "rsyslog"
+    state: "started"
+    enabled: yes
+
+- name: "Restart Rsyslog"
+  register: rsyslog_service_status
+  changed_when: rsyslog_service_status.state != "restarted"
+  ansible.builtin.service:
+    name: "rsyslog"
+    state: "restarted"
+    daemon_reload: true
