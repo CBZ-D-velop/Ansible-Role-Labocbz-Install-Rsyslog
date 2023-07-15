@@ -4,7 +4,7 @@
   ansible.builtin.package:
     update_cache: true
     name:
-      - rsyslog
+      - "rsyslog"
 
 - name: "Import rsyslog configuration"
   notify: "Restart Rsyslog"
@@ -13,4 +13,4 @@
     dest: "/etc/rsyslog.conf"
     group: "root"
     owner: "root"
-    mode: 0664
+    mode: "0664"
