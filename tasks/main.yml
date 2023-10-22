@@ -2,7 +2,7 @@
 - name: "Install packages"
   notify: "Start and enable Rsyslog"
   ansible.builtin.package:
-    update_cache: false
+    update_cache: true
     name:
       - "rsyslog"
 
